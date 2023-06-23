@@ -1,22 +1,21 @@
-"""
-URL configuration for food_recipe project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from api.views import (
+    recipe_list,
+    recipe_detail,
+    ingredient_list,
+    ingredient_detail,
+    tag_list,
+    tag_create,
+    tag_detail,
+)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('recipes/', recipe_list, name='recipe-list'),
+    path('recipes/<int:pk>/', recipe_detail, name='recipe-detail'),
+    path('recipes/<int:recipe_pk>/ingredients/', ingredient_list, name='ingredient-list'),
+    path('recipes/<int:recipe_pk>/ingredients/<int:ingredient_pk>/', ingredient_detail, name='ingredient-detail'),
+    path('recipes/tags/', tag_list, name='tag-list'),
+    path('recipes/tags/<int:pk>/', tag_detail, name='tag-detail'),
+    path('recipes/tags/create/', tag_create, name='tag-create'),
 ]
